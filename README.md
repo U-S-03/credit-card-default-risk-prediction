@@ -9,11 +9,11 @@ The objective of this project is to identify high-risk customers in advance to s
 
 ### 📊 Dataset
 - Source: Kaggle
-- Features include:
+- Features included:
   - Credit limit (LIMIT_BAL)
   - Payment history (PAY_*)
   - Bill amounts (BILL_AMT*)
-  - Previous payments (PAY_AMT*)
+  - Previous payments (PAY_AMT*) etc
 
 ### 🎯 Target Variable
 default_payment_next_month
