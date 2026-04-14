@@ -8,16 +8,15 @@ Credit card defaults cause significant financial losses for financial institutio
 The objective of this project is to identify high-risk customers in advance to support better decision-making and risk management.
 
 ### 📊 Dataset
-Source: Kaggle
-Stored in MongoDB
-Features include:
-Credit limit (LIMIT_BAL)
-Payment history (PAY_*)
-Bill amounts (BILL_AMT*)
-Previous payments (PAY_AMT*)
-🎯 Target Variable
+- Source: Kaggle
+- Features include:
+  - Credit limit (LIMIT_BAL)
+  - Payment history (PAY_*)
+  - Bill amounts (BILL_AMT*)
+  - Previous payments (PAY_AMT*)
 
-### default_payment_next_month
+### 🎯 Target Variable
+default_payment_next_month
 
 |Value|	Meaning   |
 |-----|--------   |
@@ -25,36 +24,36 @@ Previous payments (PAY_AMT*)
 |1	  | Default   |
 
 ### ⚙️ ML Pipeline
-Data Cleaning & Preprocessing
-Exploratory Data Analysis (EDA)
-Feature Engineering
-Model Training
-Model Evaluation
-Prediction System (Flask Web App)
+- Data Cleaning & Preprocessing
+- Exploratory Data Analysis (EDA)
+- Feature Engineering
+- Model Training
+- Model Evaluation
+- Prediction System (Flask Web App)
 
 ### 📈 Model & Results
-Model Used: XGBoost Classifier
-Accuracy: ~77%
+- Model Used: XGBoost Classifier
+- Accuracy: ~77%
 
-Classification Report:
-Precision, Recall, F1-score evaluated on test data
+***Classification Report:***
+- Precision, Recall, F1-score evaluated on test data
 
-⚠️ Key Insight
-The dataset is imbalanced, leading to lower recall for defaulters
-Threshold tuning (0.5 → 0.3) was applied to improve recall
+***Key Insight***
+- The dataset is imbalanced, leading to lower recall for defaulters
+- Threshold tuning (0.5 → 0.3) was applied to improve recall
 
-👉 This improves detection of high-risk customers
+*This improves detection of high-risk customers*
 
-🧠 Important Learning
-Accuracy alone is not sufficient for imbalanced datasets
-Recall is critical in financial risk problems
-Trade-off exists between precision and recall
+### 🧠 Important Learning
+- Accuracy alone is not sufficient for imbalanced datasets
+- Recall is critical in financial risk problems
+- Trade-off exists between precision and recall
 
-🖥️ Application Flow
-Train model (/train)
-Upload CSV file
-Model predicts default risk
-Download prediction results
+### 🖥️ Application Flow
+- Train model (/train)
+- Upload CSV file
+- Model predicts default risk
+- Download prediction results
 
 ### 💿 Installing
 1. Environment setup.
@@ -78,4 +77,10 @@ python app.py
 - Python 3.8
 - Machine learning
 - Scikit learn
-- 🏦 Industrial Use Cases
+- Industrial Use Cases
+
+### 🏦 Real-World Use Cases
+- Credit risk assessment
+- Fraud detection systems
+- Banking decision support
+- Loan approval systems
