@@ -6,6 +6,7 @@ import numpy as np
 from sklearn.metrics import accuracy_score
 from sklearn.naive_bayes import GaussianNB
 
+from sklearn.metrics import classification_report
 from xgboost import XGBClassifier
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
@@ -165,10 +166,16 @@ class ModelTrainer:
             )
 
             best_model.fit(x_train, y_train)
-            y_pred = best_model.predict(x_test)
+            # Get probabilities instead of direct prediction
+            y_prob = best_model.predict_proba(x_test)[:, 1]
+
+            # Lower threshold (0.5 -> 0.3)
+            y_pred = (y_prob > 0.3).astype(int)
             best_model_score = accuracy_score(y_test, y_pred)
 
             print(f"best model name {best_model_name} and score: {best_model_score}")
+            print("\nClassification Report:\n")
+            print(classification_report(y_test, y_pred))
 
             if best_model_score < 0.5:
                 raise Exception("No best model found with an accuracy greater than the threshold 0.6")

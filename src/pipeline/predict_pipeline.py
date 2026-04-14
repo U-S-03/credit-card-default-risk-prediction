@@ -48,14 +48,17 @@ class PredictionPipeline:
             pred_file_input_dir = "prediction_artifacts"
             os.makedirs(pred_file_input_dir, exist_ok=True)
 
-            input_csv_file = self.request.files['file']
-            pred_file_path = os.path.join(pred_file_input_dir, input_csv_file.filename)
+            input_csv_file = self.request.files.get('file')
+
+            if input_csv_file is None or input_csv_file.filename == "":
+                raise Exception("No file uploaded")
             
+            pred_file_path = os.path.join(pred_file_input_dir, input_csv_file.filename)
             
             input_csv_file.save(pred_file_path)
 
-
             return pred_file_path
+        
         except Exception as e:
             raise CustomException(e,sys)
 
@@ -101,14 +104,14 @@ class PredictionPipeline:
             if "Unnamed: 0" in input_dataframe.columns:
                 input_dataframe = input_dataframe.drop(columns=["Unnamed: 0"])
 
-            # IMPORTANT FIX: remove target column if present
+            # remove target column if present
             if "default payment next month" in input_dataframe.columns:
                 input_dataframe = input_dataframe.drop(columns=["default payment next month"])
 
             # Step 3: Predict
             predictions = self.predict(input_dataframe)
 
-            # ➕ Step 4: Add prediction column
+            #  Step 4: Add prediction column
             input_dataframe["prediction"] = predictions
 
             # Step 5: Save output

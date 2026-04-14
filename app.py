@@ -8,42 +8,41 @@ from src.pipeline.predict_pipeline import PredictionPipeline
 
 app = Flask(__name__)
 
+# HOME -> show upload page
 @app.route("/")
 def home():
-    return jsonify("home")
+    return render_template("upload_file.html")
 
 
+# TRAIN ROUTE
 @app.route("/train")
-def train_route():
+def train():
     try:
         train_pipeline = TraininingPipeline()
         train_pipeline.run_pipeline()
-
-        return "Training Completed."
-
+        return "Training Completed"
     except Exception as e:
-        raise CustomException(e,sys)
+        return str(e)
 
-@app.route('/predict', methods=['POST', 'GET'])
-def upload():
-    
+
+# PREDICT ROUTE
+@app.route('/predict', methods=['POST'])
+def predict():
     try:
+        file = request.files.get("file")
 
+        if file is None or file.filename == "":
+            return "No file selected"
 
-        if request.method == 'POST':
-            prediction_pipeline = PredictionPipeline(request)
-            prediction_file_detail = prediction_pipeline.run_pipeline()
+        prediction_pipeline = PredictionPipeline(request)
+        prediction_file_path = prediction_pipeline.run_pipeline()
 
-            lg.info("prediction completed. Downloading prediction file.")
-            return send_file(prediction_file_detail, as_attachment=True)
+        return send_file(prediction_file_path, as_attachment=True)
 
-
-        else:
-            return render_template('upload_file.html')
     except Exception as e:
-        raise CustomException(e,sys)
-    
+        print(e)
+        return str(e)
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug= True)
+    app.run(host="0.0.0.0", port=5000, debug=False)
