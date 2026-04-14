@@ -32,7 +32,7 @@
 ***⚠️ Recall is prioritized because failing to identify a defaulter can lead to financial loss.***
 
 
-💿 Installing
+### 💿 Installing
 1. Environment setup.
 ```
 conda create --prefix venv python==3.8 -y
@@ -49,10 +49,9 @@ pip install -r requirements.txt
 python app.py
 ```
 
-🔧 Built with
+#### 🔧 Built with
 - flask
 - Python 3.8
 - Machine learning
 - Scikit learn
 - 🏦 Industrial Use Cases
-
