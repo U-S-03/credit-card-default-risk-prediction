@@ -83,4 +83,3 @@ python app.py
 - Credit risk assessment
 - Fraud detection systems
 - Banking decision support
-- Loan approval systems
